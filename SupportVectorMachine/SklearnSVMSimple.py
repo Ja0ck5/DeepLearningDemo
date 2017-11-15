@@ -16,3 +16,8 @@ print 'support_:', clf.support_
 
 # get number of support vectors for each class 支持向量 分别的个数
 print 'n_support_:', clf.n_support_
+
+newOne = [2, .0]
+print 'newOne:', newOne
+print newOne.reshape(1, -1)  # error
+print clf.predict(newOne)
