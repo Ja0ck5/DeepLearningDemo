@@ -1,5 +1,6 @@
 # coding=utf-8
 from sklearn import svm
+import numpy
 
 x = [[2, 0], [1, 1], [2, 3]]
 y = [0, 0, 1]
@@ -19,5 +20,6 @@ print 'n_support_:', clf.n_support_
 
 newOne = [2, .0]
 print 'newOne:', newOne
-print newOne.reshape(1, -1)  # error
-print clf.predict(newOne)
+doubleDim = numpy.array(newOne).reshape(1, -1)
+print doubleDim
+print clf.predict(doubleDim)
