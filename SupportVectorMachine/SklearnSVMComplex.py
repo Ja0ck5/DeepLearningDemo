@@ -1,9 +1,9 @@
 # coding=utf-8
 print(__doc__)
 
-from sklearn import svm
 import numpy as np
 import pylab as pl
+from sklearn import svm
 
 # create 40 separable points
 np.random.seed(0)
