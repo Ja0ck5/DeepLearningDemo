@@ -1,17 +1,17 @@
 # coding=utf-8
 from __future__ import print_function
 
-
-from time import time
 import logging
-import matplotlib.pyplot as plt
+from time import time
 
-from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 from sklearn.datasets import fetch_lfw_people
-from sklearn.model_selection import GridSearchCV
+from sklearn.decomposition import RandomizedPCA
+from sklearn.decomposition import PCA
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
-from sklearn.decomposition import RandomizedPCA
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 
 print(__doc__)
@@ -22,18 +22,22 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 #############################################################################
 # Download the data,if not already on disk and load it as numpy arrays
 
-lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4, data_home='F:/py')
 
 # introspect the images arrays to find the shape (for plotting)
 n_samples, h, w = lfw_people.images.shape
 
 # for machine learning we use the 2 data directly (as relative pixel) positions info is ignored by this model)
 X = lfw_people.data
+
+print("lfw_people data: %s" % X)
+
 # dimensions column numbers
 n_features = X.shape[1]
 
 # the label to predict is the id of the person
 y = lfw_people.target
+print("lfw_people target: %s" % y)
 target_names = lfw_people.target_names
 
 # dimensions row numbers how many people
@@ -60,6 +64,7 @@ print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.
 t0 = time()
 
 pca = RandomizedPCA(n_components, whiten=True).fit(X_train)
+PCA(svd_solver='randomized')
 print("done in %0.3fs" % (time() - t0))
 
 eigenfaces = pca.components_.reshape((n_components, h, w))
