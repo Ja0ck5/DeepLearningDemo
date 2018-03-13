@@ -1,11 +1,11 @@
 from numpy import genfromtxt
 from sklearn import linear_model
 
-datapath=r"Delivery_Dummy.csv"
-data = genfromtxt(datapath,delimiter=",")
+datapath = r"Delivery_Dummy.csv"
+data = genfromtxt(datapath, delimiter=",")
 
-x = data[1:,:-1]
-y = data[1:,-1]
+x = data[1:, :-1]
+y = data[1:, -1]
 print x
 print y
 
@@ -19,7 +19,7 @@ print mlr.coef_
 print "intercept"
 print mlr.intercept_
 
-xPredict =  [90,2,0,0,1]
+xPredict = [[90, 2, 0, 0, 1]]
 yPredict = mlr.predict(xPredict)
 
 print "predict:"
